@@ -14,15 +14,17 @@ final class CountryDetailViewModel {
     var country = Country(commonName: "",
                           officialName: "",
                           capital: "",
-                          flagURL: URL(string: "")!,
+                          flagURL: URL(string: "https://flagcdn.com/w320/tg.png")!, //TODO: Optional
                           isFavorite: false)
     var isLoading = false
     var errorMessage: ErrorModel? = nil
     
     private let countryDetailLoader: () async throws -> Country
+    private let localCountriesLoader: LocalCountriesLoader
     
-    init(countryDetailLoader: @escaping () async throws -> Country) {
+    init(countryDetailLoader: @escaping () async throws -> Country, localCountriesLoader: LocalCountriesLoader) {
         self.countryDetailLoader = countryDetailLoader
+        self.localCountriesLoader = localCountriesLoader
     }
     
     @MainActor

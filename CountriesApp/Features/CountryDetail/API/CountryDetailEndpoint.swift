@@ -16,7 +16,7 @@ public enum CountryDetailEndpoint {
             var components = URLComponents()
             components.scheme = baseURL.scheme
             components.host = baseURL.host
-            components.path = baseURL.path + "/\(name)"
+            components.path = baseURL.path + "/name/\(name)"
             return components.url!
         }
     }

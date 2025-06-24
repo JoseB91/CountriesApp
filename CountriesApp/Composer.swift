@@ -67,18 +67,19 @@ class Composer {
                                   isFavoriteViewModel: false)
     }
     
-    //    func composeCountryDetailViewModel(for country: Country) -> CountryDetailViewModel {
-    //        let episodesLoader: () async throws -> [Episode] = { [baseURL, httpClient] in
-    //
-    //            let url = EpisodesEndpoint.getEpisodes(showId: show.id).url(baseURL: baseURL)
-    //            let (data, response) = try await httpClient.get(from: url)
-    //            let episodes = try EpisodesMapper.map(data, from: response)
-    //
-    //            return episodes
-    //        }
-    //
-    //        return CountryDetailViewModel(episodesLoader: episodesLoader)
-    //    }
+    func composeCountryDetailViewModel(for name: String) -> CountryDetailViewModel {
+        let countryDetailLoader: () async throws -> Country = { [baseURL, httpClient] in
+            
+           let url = CountryDetailEndpoint.getCountryDetail(name: name).url(baseURL: baseURL)
+            let (data, response) = try await httpClient.get(from: url)
+            let country = try CountryDetailMapper.map(data, from: response)
+            
+            return country
+        }
+        
+        return CountryDetailViewModel(countryDetailLoader: countryDetailLoader,
+                                      localCountriesLoader: localCountriesLoader)
+    }
     
     
     func composeFavoriteCountriesViewModel() -> CountriesViewModel {

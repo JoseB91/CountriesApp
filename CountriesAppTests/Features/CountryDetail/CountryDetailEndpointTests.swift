@@ -20,6 +20,6 @@ class CountryDetailEndpointTests: XCTestCase {
         // Assert
         XCTAssertEqual(received.scheme, "https", "scheme")
         XCTAssertEqual(received.host, "restcountries.com", "host")
-        XCTAssertEqual(received.path, "/v3.1/ecuador", "path")
+        XCTAssertEqual(received.path, "/v3.1/name/ecuador", "path")
     }
 }

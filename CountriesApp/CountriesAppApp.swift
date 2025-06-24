@@ -28,10 +28,9 @@ struct CountriesAppApp: App {
                     CountriesView(countriesViewModel: composer.composeCountriesViewModel(),
                                   navigationPath: $countriesNavigationPath,
                                   isFavoriteView: false)
-                    //                    .navigationDestination(for: Show.self) { show in
-                    //                        CountryDetailView(countryDetailViewModel: composer.composeCountryDetailViewModel(for: country),
-                    //                                       navigationPath: countriesNavigationPath,
-                    //                                       show: show)
+                    .navigationDestination(for: String.self) { name in
+                        CountryDetailView(countryDetailViewModel: composer.composeCountryDetailViewModel(for: name))
+                    }
                 }
                 .tabItem {
                     Label("Search", systemImage: "magnifyingglass")

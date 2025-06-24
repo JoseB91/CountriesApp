@@ -53,11 +53,11 @@ public final class CountryDetailMapper {
         }
 
         struct CoatOfArms: Decodable {
-            let png: URL
+            let png: URL?
         }
     }
     
-    public static func map(_ data: Data, from response: HTTPURLResponse) throws -> [Country] {
+    public static func map(_ data: Data, from response: HTTPURLResponse) throws -> Country {
         guard response.isOK else {
             throw MapperError.unsuccessfullyResponse
         }
@@ -77,7 +77,7 @@ public final class CountryDetailMapper {
                                                     carDriveSide: $0.car.side,
                                                     coatOfArms: $0.coatOfArms.png,
                                                     isFavorite: false) }
-            return countries
+            return countries[0]
         } catch {
             throw error
         }

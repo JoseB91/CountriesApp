@@ -40,7 +40,7 @@ struct CountriesView: View {
                     LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
                         ForEach(countries) { country in
                             Button {
-                                navigationPath.append(country)
+                                navigationPath.append(country.officialName)
                             } label: {
                                 CountryCardView(country: country,
                                              isFavoriteView: isFavoriteView)
