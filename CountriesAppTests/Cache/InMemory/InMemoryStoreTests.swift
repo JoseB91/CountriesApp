@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import CountriesApp
+import CountriesApp
 
 class InMemoryStoreTests: XCTestCase, CountriesStoreSpecs {
     
