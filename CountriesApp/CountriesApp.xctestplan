@@ -1,0 +1,38 @@
+{
+  "configurations" : [
+    {
+      "id" : "CD15DA76-9082-4A23-93E6-F61FEB7A735C",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : {
+      "targets" : [
+        {
+          "containerPath" : "container:CountriesApp.xcodeproj",
+          "identifier" : "B093C9F52E09FC04006E4F9C",
+          "name" : "CountriesApp"
+        }
+      ]
+    },
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:CountriesApp.xcodeproj",
+      "identifier" : "B093C9F52E09FC04006E4F9C",
+      "name" : "CountriesApp"
+    },
+    "testExecutionOrdering" : "random"
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:CountriesApp.xcodeproj",
+        "identifier" : "B093CA042E09FC06006E4F9C",
+        "name" : "CountriesAppTests"
+      }
+    }
+  ],
+  "version" : 1
+}

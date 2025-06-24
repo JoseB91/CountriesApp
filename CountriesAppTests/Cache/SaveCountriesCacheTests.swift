@@ -45,22 +45,22 @@ final class SaveCountriesCacheTests: XCTestCase {
     
     func test_save_succeedsOnSuccessfulFavoriteInsertion() async {
         // Arrange
-        let showId = 1
+        let flagURL = anyURL()
         let (sut, store) = makeSUT()
         
         // Act & Assert
-        await expectFavorite(sut, for: showId, toCompleteWithError: nil, when: {
+        await expectFavorite(sut, with: flagURL, toCompleteWithError: nil, when: {
             store.completeFavoriteInsertionSuccessfully()
         })
     }
     
     func test_save_failsOnFavoriteInsertionError() async {
         // Arrange
-        let showId = 1
+        let flagURL = anyURL()
         let (sut, store) = makeSUT()
         
         // Act & Assert
-        await expectFavorite(sut, for: showId, toCompleteWithError: anyNSError(), when: {
+        await expectFavorite(sut, with: flagURL, toCompleteWithError: anyNSError(), when: {
             store.completeFavoriteInsertion(with: anyNSError())
         })
     }
@@ -87,10 +87,10 @@ final class SaveCountriesCacheTests: XCTestCase {
         }
     }
     
-    private func expectFavorite(_ sut: LocalCountriesLoader, for showId: Int, toCompleteWithError expectedError: NSError?, when action: () async -> Void?, file: StaticString = #filePath, line: UInt = #line) async {
+    private func expectFavorite(_ sut: LocalCountriesLoader, with flagURL: URL, toCompleteWithError expectedError: NSError?, when action: () async -> Void?, file: StaticString = #filePath, line: UInt = #line) async {
         do {
             // Act
-            try await sut.saveFavorite(for: showId)
+            try await sut.saveFavorite(with: flagURL)
             
             await action()
         } catch {
