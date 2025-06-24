@@ -12,6 +12,14 @@ public struct Country: Identifiable, Hashable {
     public let officialName: String
     public let capital: String
     public let flagURL: URL
+//    public let region: String
+//    public let subregion: String
+//    public let population: Double
+//    public let timezones: [String]
+//    public let languages: [String]
+//    public let currencies: [String]
+//    public let carDriveSide: String
+//    public let coatOfArms: URL?
     public var isFavorite: Bool
     
     public var id: String { commonName }
@@ -24,3 +32,5 @@ public struct Country: Identifiable, Hashable {
         self.isFavorite = isFavorite
     }
 }
+
+

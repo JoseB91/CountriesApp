@@ -24,3 +24,4 @@ public enum CountriesEndpoint {
         }
     }
 }
+//?fields=name,flags,capital,region,subregion,timezones,population,languages,currencies,coatOfArms
