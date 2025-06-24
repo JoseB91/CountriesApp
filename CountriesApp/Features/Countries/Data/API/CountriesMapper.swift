@@ -42,16 +42,3 @@ public final class CountriesMapper {
         }
     }
 }
-
-public enum MapperError: Error {
-    case unsuccessfullyResponse
-}
-
-extension HTTPURLResponse {
-    private static var OK_200: Int { return 200 }
-    
-    var isOK: Bool {
-        return statusCode == HTTPURLResponse.OK_200
-    }
-}
-

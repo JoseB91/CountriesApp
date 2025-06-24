@@ -52,3 +52,15 @@ extension Date {
         return 7
     }
 }
+
+extension HTTPURLResponse {
+    convenience init(statusCode: Int) {
+        self.init(url: anyURL(), statusCode: statusCode, httpVersion: nil, headerFields: nil)!
+    }
+}
+
+extension String {
+    func makeJSON() -> Data {
+        return self.data(using: .utf8)!
+    }
+}
