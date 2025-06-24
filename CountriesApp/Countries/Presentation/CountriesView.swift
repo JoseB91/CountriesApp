@@ -7,7 +7,9 @@
 
 import Foundation
 import SwiftUI
-
+//TODO: UpdateUI
+//TODO: Add DetailView with button to bookmark
+//TODO: Implement save with rest api
 struct CountriesView: View {
     @State var countriesViewModel: CountriesViewModel
     @Binding var navigationPath: NavigationPath
