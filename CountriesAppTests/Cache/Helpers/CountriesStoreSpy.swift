@@ -61,6 +61,10 @@ public class CountriesStoreSpy: CountriesStore {
         retrievalResult = .failure(error)
     }
     
+    func completeRetrievalWithEmptyCache() {
+        retrievalResult = .success(.none)
+    }
+    
     func completeRetrievalWithExpiredCache(with countries: [LocalCountry], timestamp: Date, error: Error) {
         retrievalResult = .failure(error)
     }

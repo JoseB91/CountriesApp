@@ -42,5 +42,3 @@ extension CoreDataCountriesAppStore: CountriesStore {
         }
     }
 }
-
-//TODO: Add tests and InMemory

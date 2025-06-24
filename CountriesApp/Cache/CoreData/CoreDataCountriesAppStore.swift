@@ -6,7 +6,7 @@
 //
 
 import CoreData
-//TODO: Add unit tests
+
 public final class CoreDataCountriesAppStore {
     private static let modelName = "CountriesAppStore"
     private static let model = NSManagedObjectModel.with(name: modelName, in: Bundle(for: CoreDataCountriesAppStore.self))
