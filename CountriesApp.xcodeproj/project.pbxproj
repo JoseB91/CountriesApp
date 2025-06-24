@@ -14,19 +14,11 @@
 			remoteGlobalIDString = B093C9F52E09FC04006E4F9C;
 			remoteInfo = CountriesApp;
 		};
-		B093CA102E09FC06006E4F9C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B093C9EE2E09FC04006E4F9C /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B093C9F52E09FC04006E4F9C;
-			remoteInfo = CountriesApp;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		B093C9F62E09FC04006E4F9C /* CountriesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CountriesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B093CA052E09FC06006E4F9C /* CountriesAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CountriesAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B093CA0F2E09FC06006E4F9C /* CountriesAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CountriesAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -57,13 +49,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B093CA0C2E09FC06006E4F9C /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -81,7 +66,6 @@
 			children = (
 				B093C9F62E09FC04006E4F9C /* CountriesApp.app */,
 				B093CA052E09FC06006E4F9C /* CountriesAppTests.xctest */,
-				B093CA0F2E09FC06006E4F9C /* CountriesAppUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -134,26 +118,6 @@
 			productReference = B093CA052E09FC06006E4F9C /* CountriesAppTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		B093CA0E2E09FC06006E4F9C /* CountriesAppUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B093CA1F2E09FC06006E4F9C /* Build configuration list for PBXNativeTarget "CountriesAppUITests" */;
-			buildPhases = (
-				B093CA0B2E09FC06006E4F9C /* Sources */,
-				B093CA0C2E09FC06006E4F9C /* Frameworks */,
-				B093CA0D2E09FC06006E4F9C /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				B093CA112E09FC06006E4F9C /* PBXTargetDependency */,
-			);
-			name = CountriesAppUITests;
-			packageProductDependencies = (
-			);
-			productName = CountriesAppUITests;
-			productReference = B093CA0F2E09FC06006E4F9C /* CountriesAppUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -170,10 +134,6 @@
 					B093CA042E09FC06006E4F9C = {
 						CreatedOnToolsVersion = 16.4;
 						LastSwiftMigration = 1640;
-						TestTargetID = B093C9F52E09FC04006E4F9C;
-					};
-					B093CA0E2E09FC06006E4F9C = {
-						CreatedOnToolsVersion = 16.4;
 						TestTargetID = B093C9F52E09FC04006E4F9C;
 					};
 				};
@@ -194,7 +154,6 @@
 			targets = (
 				B093C9F52E09FC04006E4F9C /* CountriesApp */,
 				B093CA042E09FC06006E4F9C /* CountriesAppTests */,
-				B093CA0E2E09FC06006E4F9C /* CountriesAppUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -208,13 +167,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		B093CA032E09FC06006E4F9C /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B093CA0D2E09FC06006E4F9C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -238,13 +190,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B093CA0B2E09FC06006E4F9C /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -252,11 +197,6 @@
 			isa = PBXTargetDependency;
 			target = B093C9F52E09FC04006E4F9C /* CountriesApp */;
 			targetProxy = B093CA062E09FC06006E4F9C /* PBXContainerItemProxy */;
-		};
-		B093CA112E09FC06006E4F9C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B093C9F52E09FC04006E4F9C /* CountriesApp */;
-			targetProxy = B093CA102E09FC06006E4F9C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -491,40 +431,6 @@
 			};
 			name = Release;
 		};
-		B093CA202E09FC06006E4F9C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 9V3336X7NB;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.joseb91.CountriesAppUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = CountriesApp;
-			};
-			name = Debug;
-		};
-		B093CA212E09FC06006E4F9C /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 9V3336X7NB;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.joseb91.CountriesAppUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = CountriesApp;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -551,15 +457,6 @@
 			buildConfigurations = (
 				B093CA1D2E09FC06006E4F9C /* Debug */,
 				B093CA1E2E09FC06006E4F9C /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B093CA1F2E09FC06006E4F9C /* Build configuration list for PBXNativeTarget "CountriesAppUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B093CA202E09FC06006E4F9C /* Debug */,
-				B093CA212E09FC06006E4F9C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

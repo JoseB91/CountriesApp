@@ -76,18 +76,15 @@ final class CountriesViewModel {
 //    }
 }
 
-//final class MockShowsViewModel {
-//    static func mockShow() -> Country {
-//        return Country(id: 250,
-//                    name: "Kirby Buckets",
-//                    imageURL: URL(string: "https://static.tvmaze.com/uploads/images/medium_portrait/1/4600.jpg")!,
-//                    schedule: "Weekdays at 07:00",
-//                    genres: "Comedy",
-//                    summary: "The single-camera series that mixes live-action and animation stars Jacob Bertrand as the title character. Kirby Buckets introduces viewers to the vivid imagination of charismatic 13-year-old Kirby Buckets, who dreams of becoming a famous animator like his idol, Mac MacCallister. With his two best friends, Fish and Eli, by his side, Kirby navigates his eccentric town of Forest Hills where the trio usually find themselves trying to get out of a predicament before Kirby's sister, Dawn, and her best friend, Belinda, catch them. Along the way, Kirby is joined by his animated characters, each with their own vibrant personality that only he and viewers can see.",
-//                    rating: "",
-//                    isFavorite: false)
-//    }
-//    
+final class MockCountriesViewModel {
+    static func mockCountry() -> Country {
+        return Country(commonName: "Togo",
+                       officialName: "Togolese Republic",
+                       capital: "Lomé",
+                       flagURL: URL(string: "https://flagcdn.com/w320/tg.png")!,
+                       isFavorite: false)
+    }
+    
 //    static func mockShowsLoader(_ page: Int, _ append: Bool) async throws -> [Country] {
 //        return [mockShow()]
 //    }
@@ -95,7 +92,7 @@ final class CountriesViewModel {
 //    static func mockLocalShowsLoader() -> LocalShowsLoader {
 //        return LocalShowsLoader(store: MockShowStore(), currentDate: Date.init)
 //    }
-//}
+}
 
 //final class MockShowStore: ShowsStore {
 //    func deleteCache() async throws {

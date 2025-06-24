@@ -20,6 +20,18 @@ final class URLSessionHTTPClientTests: XCTestCase {
         super.tearDown()
     }
     
+    func test_getFromURL_performsGETRequestWithURL() async throws {
+        let sut = makeSUT()
+        let url = anyURL()
+        
+        URLProtocolStub.request = nil
+        
+        _ = try? await sut.get(from: url)
+
+        XCTAssertEqual(URLProtocolStub.request?.url, url)
+        XCTAssertEqual(URLProtocolStub.request?.httpMethod, "GET")
+    }
+    
     func test_getFromURL_throwsErrorOnRequestFailure() async {
         let sut = makeSUT()
         
@@ -47,18 +59,6 @@ final class URLSessionHTTPClientTests: XCTestCase {
         }
     }
     
-    func test_getFromURL_performsGETRequestWithURL() async throws {
-        let sut = makeSUT()
-        let url = anyURL()
-        
-        URLProtocolStub.request = nil
-        
-        _ = try? await sut.get(from: url)
-
-        XCTAssertEqual(URLProtocolStub.request?.url, url)
-        XCTAssertEqual(URLProtocolStub.request?.httpMethod, "GET")
-    }
-    
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> HTTPClient {
         let config = URLSessionConfiguration.ephemeral
         config.protocolClasses = [URLProtocolStub.self]
@@ -72,11 +72,7 @@ final class URLSessionHTTPClientTests: XCTestCase {
     }
     
     // MARK: - Helpers
-    
-    func anyURL() -> URL {
-        return URL(string: "http://any-url.com")!
-    }
-    
+        
     func anyData() -> Data {
         return Data("any data".utf8)
     }
