@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CountryCardView: View {
     let country: Country
-    let isFavoriteView: Bool = false
+    let isFavoriteView: Bool
     
     var body: some View {
         VStack(alignment: .leading) {

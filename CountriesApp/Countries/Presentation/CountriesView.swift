@@ -9,9 +9,9 @@ import Foundation
 import SwiftUI
 
 struct CountriesView: View {
-    @State var countriesViewModel: CountriesViewModel = CountriesViewModel()
-    //@Binding var navigationPath: NavigationPath
-    let isFavoriteView: Bool = false
+    @State var countriesViewModel: CountriesViewModel
+    @Binding var navigationPath: NavigationPath
+    let isFavoriteView: Bool
 
     @State private var searchText = ""
     
@@ -27,50 +27,35 @@ struct CountriesView: View {
     }
     
     var body: some View {
-//        ZStack {
-//            if isFavoriteView && countriesViewModel.countries.filter(\.self.isFavorite).isEmpty {
-//                Text("Your bookmarked countries will appear here")
-//            } else if countriesViewModel.isLoading {
-//                ProgressView("Loading countries...")
-//                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-//            } else {
-//                ScrollView {
-//                    LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
-//                        ForEach(countries) { country in
-//                            Button {
-//                                //navigationPath.append(show)
-//                            } label: {
-//                                CountryCardView(country: country,
-//                                             isFavoriteView: isFavoriteView)
-//                            }
-//                            .buttonStyle(PlainButtonStyle())
-//                        }
-//                    }
-//                    .padding()
-//                    .searchable(text: $searchText, prompt: "Search countries")
-//                }
-//                .background(Color(.systemGray6))
-//            }
-//        }
-        ScrollView {
-            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
-                ForEach(countries) { country in
-                    Button {
-                        //navigationPath.append(show)
-                    } label: {
-                        CountryCardView(country: country)
+        ZStack {
+            if isFavoriteView && countriesViewModel.countries.filter(\.self.isFavorite).isEmpty {
+                Text("Your bookmarked countries will appear here")
+            } else if countriesViewModel.isLoading {
+                ProgressView("Loading countries...")
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+            } else {
+                ScrollView {
+                    LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
+                        ForEach(countries) { country in
+                            Button {
+                                navigationPath.append(country)
+                            } label: {
+                                CountryCardView(country: country,
+                                             isFavoriteView: isFavoriteView)
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                        }
                     }
-                    .buttonStyle(PlainButtonStyle())
+                    .padding()
+                    .searchable(text: $searchText, prompt: "Search")
                 }
             }
-            .padding()
-            .searchable(text: $searchText, prompt: "Search countries")
         }
-        .background(Color(.systemGray6))
+        .navigationBarTitleDisplayMode(.inline)
         .task {
             await countriesViewModel.loadCountries()
         }
-        .navigationTitle(isFavoriteView ? "Favorites" : "Countries")
+        .navigationTitle(isFavoriteView ? "Saved" : "Search")
         .alert(item: $countriesViewModel.errorMessage) { error in
             Alert(
                 title: Text("Error"),
@@ -81,12 +66,13 @@ struct CountriesView: View {
     }
 }
 
-//#Preview {
-//    let countriesViewModel = ShowsViewModel(showsLoader: MockShowsViewModel.mockShowsLoader,
-//                                        localShowsLoader: MockShowsViewModel.mockLocalShowsLoader(),
-//                                        isFavoriteViewModel: false)
-//    
-//    ShowsView(countriesViewModel: countriesViewModel,
-//              navigationPath: .constant(NavigationPath()),
-//              isFavoriteView: false)
-//}
+#Preview {
+    let countriesViewModel = CountriesViewModel(
+        countriesLoader: MockCountriesViewModel.mockCountriesLoader,
+        isFavoriteViewModel: false
+    )
+    
+    CountriesView(countriesViewModel: countriesViewModel,
+                  navigationPath: .constant(NavigationPath()),
+                  isFavoriteView: false)
+}

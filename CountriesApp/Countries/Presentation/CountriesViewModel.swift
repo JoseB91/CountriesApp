@@ -16,42 +16,37 @@ final class CountriesViewModel {
     var errorMessage: ErrorModel? = nil
     var searchText: String = ""
     
-    //private let countriesLoader: () async throws -> [Country]
-    //private let isFavoriteViewModel: Bool
+    private let countriesLoader: () async throws -> [Country]
+    private let isFavoriteViewModel: Bool
     
-//    init(countriesLoader: @escaping () async throws -> [Country], isFavoriteViewModel: Bool) {
-//        self.countriesLoader = countriesLoader
-//        self.isFavoriteViewModel = isFavoriteViewModel
-//    }
+    init(countriesLoader: @escaping () async throws -> [Country], isFavoriteViewModel: Bool) {
+        self.countriesLoader = countriesLoader
+        self.isFavoriteViewModel = isFavoriteViewModel
+    }
     
     @MainActor
     func loadCountries() async {
-//        if isFavoriteViewModel {
-//            isLoading = true
-//            
-//            do {
-//                countries = try await countriesLoader()
-//            } catch {
-//                errorMessage = ErrorModel(message: "Failed to load favorite countries: \(error.localizedDescription)")
-//            }
-//            
-//            isLoading = false
-//        } else {
+        if isFavoriteViewModel {
             isLoading = true
             
             do {
-                let httpClient = URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
-                let baseURL = URL(string: "https://restcountries.com/v3.1/")!
-                let url = CountriesEndpoint.getCountries.url(baseURL: baseURL)
-                let (data, response) = try await httpClient.get(from: url)
-                countries = try CountriesMapper.map(data, from: response)
-                //countries = try await countriesLoader()
+                countries = try await countriesLoader()
+            } catch {
+                errorMessage = ErrorModel(message: "Failed to load favorite countries: \(error.localizedDescription)")
+            }
+            
+            isLoading = false
+        } else {
+            isLoading = true
+            
+            do {
+                countries = try await countriesLoader()
             } catch {
                 errorMessage = ErrorModel(message: "Failed to load countries: \(error.localizedDescription)")
             }
         
             isLoading = false
-        //}
+        }
     }
         
 //    func toggleFavorite(for show: Country) {
@@ -85,29 +80,29 @@ final class MockCountriesViewModel {
                        isFavorite: false)
     }
     
-//    static func mockShowsLoader(_ page: Int, _ append: Bool) async throws -> [Country] {
-//        return [mockShow()]
-//    }
-//    
-//    static func mockLocalShowsLoader() -> LocalShowsLoader {
-//        return LocalShowsLoader(store: MockShowStore(), currentDate: Date.init)
-//    }
+    static func mockCountriesLoader() async throws -> [Country] {
+        return [mockCountry()]
+    }
+    
+    static func mockLocalCountriesLoader() -> LocalCountriesLoader {
+        return LocalCountriesLoader(store: MockCountryStore(), currentDate: Date.init)
+    }
 }
 
-//final class MockShowStore: ShowsStore {
-//    func deleteCache() async throws {
-//    }
-//    
-//    func insert(_ countries: [LocalShow], timestamp: Date) async throws {
-//    }
-//    
-//    func retrieve() async throws -> CachedShows? {
-//        return nil
-//    }
-//    
-//    func insertFavorite(for showId: Int) async throws {
-//    }
-//}
+final class MockCountryStore: CountriesStore {
+    func deleteCache() async throws {
+    }
+    
+    func insert(_ countries: [LocalCountry], timestamp: Date) async throws {
+    }
+    
+    func retrieve() async throws -> CachedCountries? {
+        return nil
+    }
+    
+    func insertFavorite(with flagURL: URL) async throws {
+    }
+}
 
 struct ErrorModel: Identifiable {
     let id = UUID()

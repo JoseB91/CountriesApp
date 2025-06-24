@@ -43,9 +43,9 @@ extension LocalCountriesLoader {
         }
     }
     
-    public func saveFavorite(for countryId: Int) async throws {
+    public func saveFavorite(with flagURL: URL) async throws {
         do {
-            try await store.insertFavorite(for: countryId)
+            try await store.insertFavorite(with: flagURL)
         } catch {
             throw FailedFavoriteSave()
         }
