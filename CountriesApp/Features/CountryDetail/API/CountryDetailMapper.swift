@@ -76,7 +76,7 @@ public final class CountryDetailMapper {
                                                     //currencies: "\($0.currencies.usd.symbol) \($0.currencies.usd.name)",
                                                     carDriveSide: $0.car.side,
                                                     coatOfArms: $0.coatOfArms.png,
-                                                    isFavorite: false) }
+                                                    isBookmarked: false) }
             return countries[0]
         } catch {
             throw error

@@ -35,7 +35,7 @@ public final class CountriesMapper {
                                                     officialName: $0.name.official,
                                                     capital: $0.capital.joined(separator: ","),
                                                     flagURL: $0.flags.png,
-                                                    isFavorite: false) }
+                                                    isBookmarked: false) }
             return countries
         } catch {
             throw error

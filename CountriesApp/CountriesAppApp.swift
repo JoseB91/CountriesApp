@@ -23,11 +23,12 @@ struct CountriesAppApp: App {
     var body: some Scene {
         WindowGroup {
             TabView(selection: $selectedTab) {
+                
                 // Countries Tab
                 NavigationStack(path: $countriesNavigationPath) {
                     CountriesView(countriesViewModel: composer.composeCountriesViewModel(),
                                   navigationPath: $countriesNavigationPath,
-                                  isFavoriteView: false)
+                                  isBookmarkView: false)
                     .navigationDestination(for: String.self) { name in
                         CountryDetailView(countryDetailViewModel: composer.composeCountryDetailViewModel(for: name))
                     }
@@ -41,7 +42,7 @@ struct CountriesAppApp: App {
                 NavigationStack(path: $savedNavigationPath) {
                     CountriesView(countriesViewModel: composer.composeFavoriteCountriesViewModel(),
                                   navigationPath: $savedNavigationPath,
-                                  isFavoriteView: true)
+                                  isBookmarkView: true)
                 }
                 .tabItem {
                     Label("Saved", systemImage: "star.fill")

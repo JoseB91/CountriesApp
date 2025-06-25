@@ -48,27 +48,6 @@ final class CountriesViewModel {
             isLoading = false
         }
     }
-        
-//    func toggleFavorite(for show: Country) {
-//        if let index = countries.firstIndex(where: { $0.id == show.id }) {
-//            countries[index].isFavorite.toggle()
-//            
-//            Task {
-//                do {
-//                    try await localShowsLoader.saveFavorite(for: show.id)
-//                } catch {
-//                    await MainActor.run {
-//                        self.errorMessage = ErrorModel(message: "Failed to save favorite: \(error.localizedDescription)")
-//                        
-//                        
-//                        if let index = self.countries.firstIndex(where: { $0.id == show.id }) {
-//                            self.countries[index].isFavorite.toggle()
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//    }
 }
 
 final class MockCountriesViewModel {
@@ -77,30 +56,11 @@ final class MockCountriesViewModel {
                        officialName: "Togolese Republic",
                        capital: "Lomé",
                        flagURL: URL(string: "https://flagcdn.com/w320/tg.png")!,
-                       isFavorite: false)
+                       isBookmarked: false)
     }
     
     static func mockCountriesLoader() async throws -> [Country] {
         return [mockCountry()]
-    }
-    
-    static func mockLocalCountriesLoader() -> LocalCountriesLoader {
-        return LocalCountriesLoader(store: MockCountryStore(), currentDate: Date.init)
-    }
-}
-
-final class MockCountryStore: CountriesStore {
-    func deleteCache() async throws {
-    }
-    
-    func insert(_ countries: [LocalCountry], timestamp: Date) async throws {
-    }
-    
-    func retrieve() async throws -> CachedCountries? {
-        return nil
-    }
-    
-    func insertFavorite(with flagURL: URL) async throws {
     }
 }
 

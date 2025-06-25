@@ -13,7 +13,7 @@ class ManagedCountry: NSManagedObject {
     @NSManaged var officialName: String
     @NSManaged var capital: String
     @NSManaged var flagURL: URL
-    @NSManaged var isFavorite: Bool
+    @NSManaged var isBookmarked: Bool
     @NSManaged var data: Data?
     @NSManaged var cache: ManagedCache
 }
@@ -45,11 +45,14 @@ extension ManagedCountry {
             managedCountry.commonName = local.commonName
             managedCountry.officialName = local.officialName
             managedCountry.capital = local.capital
-            managedCountry.flagURL = local.flagURL
-            managedCountry.isFavorite = local.isFavorite
-            if let cachedData = URLImageCache.shared.getImageData(for: local.flagURL) {
-                managedCountry.data = cachedData
+            if let flagURL = local.flagURL {
+                managedCountry.flagURL = flagURL
+                if let cachedData = URLImageCache.shared.getImageData(for: flagURL) {
+                    managedCountry.data = cachedData
+                }
             }
+            managedCountry.isBookmarked = local.isBookmarked
+
             return managedCountry
         })
         return set
@@ -60,7 +63,7 @@ extension ManagedCountry {
                             officialName: officialName,
                             capital: capital,
                             flagURL: flagURL,
-                            isFavorite: isFavorite)
+                            isBookmarked: isBookmarked)
     }
 }
 

@@ -11,14 +11,14 @@ public struct LocalCountry: Equatable {
     public let commonName: String
     public let officialName: String
     public let capital: String
-    public let flagURL: URL
-    public var isFavorite: Bool
+    public let flagURL: URL?
+    public var isBookmarked: Bool
     
-    public init(commonName: String, officialName: String, capital: String, flagURL: URL, isFavorite: Bool) {
+    public init(commonName: String, officialName: String, capital: String, flagURL: URL?, isBookmarked: Bool) {
         self.commonName = commonName
         self.officialName = officialName
         self.capital = capital
         self.flagURL = flagURL
-        self.isFavorite = isFavorite
+        self.isBookmarked = isBookmarked
     }
 }

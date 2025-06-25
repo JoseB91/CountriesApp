@@ -9,11 +9,13 @@ import SwiftUI
 
 struct CountryCardView: View {
     let country: Country
-    let isFavoriteView: Bool
+    let isBookmarkView: Bool
     
     var body: some View {
         VStack(alignment: .leading) {
-            ImageView(url: country.flagURL)
+            if let flagURL = country.flagURL {
+                ImageView(url: flagURL)
+            }
             
             Text(country.commonName)
                 .font(.headline)
@@ -22,12 +24,12 @@ struct CountryCardView: View {
                 .padding(.init(top: 4, leading: 4, bottom: 4, trailing: 4))
             
 //            HStack(spacing: 12) {
-//                if !isFavoriteView {
+//                if !isBookmarkView {
 //                    Button(action: {
 //                        showsViewModel.toggleFavorite(for: show)
 //                    }) {
-//                        Image(systemName: show.isFavorite ? "heart.fill" : "heart")
-//                            .foregroundColor(show.isFavorite ? .red : .secondary)
+//                        Image(systemName: show.isBookmarked ? "heart.fill" : "heart")
+//                            .foregroundColor(show.isBookmarked ? .red : .secondary)
 //                    }
 //                }
 //            }

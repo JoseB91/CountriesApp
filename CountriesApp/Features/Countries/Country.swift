@@ -12,7 +12,7 @@ public struct Country: Identifiable, Hashable {
     public let commonName: String
     public let officialName: String
     public let capital: String
-    public let flagURL: URL
+    public let flagURL: URL?
     public let region: String?
     public let subregion: String?
     public let population: Int?
@@ -21,11 +21,11 @@ public struct Country: Identifiable, Hashable {
     public let currencies: String?
     public let carDriveSide: String?
     public let coatOfArms: URL?
-    public var isFavorite: Bool
+    public var isBookmarked: Bool
     
     public var id: String { commonName }
     
-    public init(commonName: String, officialName: String, capital: String, flagURL: URL, region: String? = nil, subregion: String? = nil, population: Int? = nil, timezones: [String]? = nil, languages: String? = nil, currencies: String? = nil, carDriveSide: String? = nil, coatOfArms: URL? = nil, isFavorite: Bool) {
+    public init(commonName: String, officialName: String, capital: String, flagURL: URL? = nil, region: String? = nil, subregion: String? = nil, population: Int? = nil, timezones: [String]? = nil, languages: String? = nil, currencies: String? = nil, carDriveSide: String? = nil, coatOfArms: URL? = nil, isBookmarked: Bool) {
         self.commonName = commonName
         self.officialName = officialName
         self.capital = capital
@@ -38,6 +38,6 @@ public struct Country: Identifiable, Hashable {
         self.currencies = currencies
         self.carDriveSide = carDriveSide
         self.coatOfArms = coatOfArms
-        self.isFavorite = isFavorite
+        self.isBookmarked = isBookmarked
     }
 }

@@ -34,10 +34,10 @@ extension CoreDataCountriesAppStore: CountriesStore {
         }
     }
     
-    public func insertFavorite(with flagURL: URL) async throws {
+    public func insertBookmark(with flagURL: URL) async throws {
         try await context.perform { [context] in
             let managedCountry = try ManagedCountry.getCountry(with: flagURL, in: context)
-            managedCountry?.isFavorite.toggle()
+            managedCountry?.isBookmarked.toggle()
             try context.save()
         }
     }

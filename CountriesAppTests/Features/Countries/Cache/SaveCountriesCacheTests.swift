@@ -90,7 +90,7 @@ final class SaveCountriesCacheTests: XCTestCase {
     private func expectFavorite(_ sut: LocalCountriesLoader, with flagURL: URL, toCompleteWithError expectedError: NSError?, when action: () async -> Void?, file: StaticString = #filePath, line: UInt = #line) async {
         do {
             // Act
-            try await sut.saveFavorite(with: flagURL)
+            try await sut.saveBookmark(with: flagURL)
             
             await action()
         } catch {

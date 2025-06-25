@@ -9,7 +9,7 @@
         <attribute name="commonName" attributeType="String"/>
         <attribute name="data" optional="YES" attributeType="Binary"/>
         <attribute name="flagURL" attributeType="URI"/>
-        <attribute name="isFavorite" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isBookmarked" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="officialName" attributeType="String"/>
         <relationship name="cache" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ManagedCache" inverseName="countries" inverseEntity="ManagedCache"/>
     </entity>

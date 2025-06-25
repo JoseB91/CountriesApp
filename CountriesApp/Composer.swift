@@ -52,14 +52,16 @@ class Composer {
                 let url = CountriesEndpoint.getCountries.url(baseURL: baseURL)
                 let (data, response) = try await httpClient.get(from: url)
                 let countries = try CountriesMapper.map(data, from: response)
-                
+                                
                 do {
                     try await localCountriesLoader.save(countries)
                 } catch {
                     print(error)
                 }
                 
-                return countries
+                let sortedCountries = countries.sorted { $0.commonName < $1.commonName }
+                
+                return sortedCountries
             }
         }
         
@@ -70,7 +72,7 @@ class Composer {
     func composeCountryDetailViewModel(for name: String) -> CountryDetailViewModel {
         let countryDetailLoader: () async throws -> Country = { [baseURL, httpClient] in
             
-           let url = CountryDetailEndpoint.getCountryDetail(name: name).url(baseURL: baseURL)
+            let url = CountryDetailEndpoint.getCountryDetail(name: name).url(baseURL: baseURL)
             let (data, response) = try await httpClient.get(from: url)
             let country = try CountryDetailMapper.map(data, from: response)
             

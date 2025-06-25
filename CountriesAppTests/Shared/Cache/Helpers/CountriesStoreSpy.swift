@@ -13,7 +13,7 @@ public class CountriesStoreSpy: CountriesStore {
         case delete
         case insert([LocalCountry], Date)
         case retrieve
-        case insertFavorite(URL)
+        case insertBookmark(URL)
     }
     
     private(set) var receivedMessages = [ReceivedMessage]()
@@ -74,8 +74,8 @@ public class CountriesStoreSpy: CountriesStore {
     }
     
     // MARK: Insert Favorite
-    public func insertFavorite(with flagURL: URL) async throws {
-        receivedMessages.append(.insertFavorite(flagURL))
+    public func insertBookmark(with flagURL: URL) async throws {
+        receivedMessages.append(.insertBookmark(flagURL))
         try favoriteInsertionResult?.get()
     }
     

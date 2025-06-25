@@ -9,10 +9,12 @@ import SwiftUI
 
 struct CountryDetailView: View {
     @State var countryDetailViewModel: CountryDetailViewModel
-    
+
     var body: some View {
         VStack(alignment: .leading) {
-            ImageView(url: countryDetailViewModel.country.flagURL)
+            if let flagURL = countryDetailViewModel.country.flagURL {
+                ImageView(url: flagURL)
+            }
             
             Text(countryDetailViewModel.country.commonName)
                 .font(.headline)
@@ -21,6 +23,16 @@ struct CountryDetailView: View {
                 .padding(.init(top: 4, leading: 4, bottom: 4, trailing: 4))
         }
         .cornerRadius(8)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {
+                    toggleBookmark()
+                }) {
+                    Image(systemName: countryDetailViewModel.country.isBookmarked ? "bookmark.fill" : "bookmark")
+                        .foregroundColor(.blue)
+                }
+            }
+        }
         .task {
             await countryDetailViewModel.loadCountryDetail()
         }
@@ -32,4 +44,20 @@ struct CountryDetailView: View {
             )
         }
     }
+    
+    private func toggleBookmark() {
+        withAnimation(.easeInOut(duration: 0.2)) {
+            if let flagURL = countryDetailViewModel.country.flagURL {
+                countryDetailViewModel.toggleBookmark(for: flagURL)
+            }
+        }
+    }
+}
+
+#Preview {
+    let countryDetailViewModel = CountryDetailViewModel(
+        countryDetailLoader: MockCountryDetailViewModel.mockCountryDetail,
+        localCountriesLoader: MockCountryDetailViewModel.mockLocalCountriesLoader()
+    )
+    CountryDetailView(countryDetailViewModel: countryDetailViewModel)
 }

@@ -33,6 +33,9 @@ extension ManagedCache {
     }
             
     var localCountries: [LocalCountry] {
-        return countries.compactMap { ($0 as? ManagedCountry)?.local }
+        let sortedCountries = countries
+            .compactMap { $0 as? ManagedCountry }
+            .sorted { $0.commonName < $1.commonName }
+        return sortedCountries.map { $0.local }
     }
 }

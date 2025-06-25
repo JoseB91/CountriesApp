@@ -36,7 +36,7 @@ extension CountriesStoreSpecs where Self: XCTestCase {
                                     officialName: "Republic of Ecuador",
                                     capital: "Quito",
                                     flagURL: anyURL(),
-                                    isFavorite: false)], Date()), to: sut)
+                                    isBookmarked: false)], Date()), to: sut)
    
         //Assert
         await expect(sut, toRetrieve: .success(CachedCountries(countries: mockCountries().local, timestamp: timestamp)))

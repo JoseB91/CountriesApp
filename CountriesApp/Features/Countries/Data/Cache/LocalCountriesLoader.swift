@@ -43,9 +43,9 @@ extension LocalCountriesLoader {
         }
     }
     
-    public func saveFavorite(with flagURL: URL) async throws {
+    public func saveBookmark(with flagURL: URL) async throws {
         do {
-            try await store.insertFavorite(with: flagURL)
+            try await store.insertBookmark(with: flagURL)
         } catch {
             throw FailedFavoriteSave()
         }
@@ -74,7 +74,7 @@ extension Array where Element == Country {
                                   officialName: $0.officialName,
                                   capital: $0.capital,
                                   flagURL: $0.flagURL,
-                                  isFavorite: $0.isFavorite)
+                                  isBookmarked: $0.isBookmarked)
         }
     }
 }
@@ -85,7 +85,7 @@ private extension Array where Element == LocalCountry {
                              officialName: $0.officialName,
                              capital: $0.capital,
                              flagURL: $0.flagURL,
-                             isFavorite: $0.isFavorite)
+                             isBookmarked: $0.isBookmarked)
         }
     }
 }

@@ -13,5 +13,5 @@ public protocol CountriesStore {
     func deleteCache() async throws
     func insert(_ countries: [LocalCountry], timestamp: Date) async throws
     func retrieve() async throws -> CachedCountries?
-    func insertFavorite(with flagURL: URL) async throws
+    func insertBookmark(with flagURL: URL) async throws
 }

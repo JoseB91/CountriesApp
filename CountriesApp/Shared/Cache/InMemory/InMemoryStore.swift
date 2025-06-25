@@ -28,6 +28,6 @@ extension InMemoryStore: CountriesStore {
         countriesCache
     }
     
-    public func insertFavorite(with flagURL: URL) async throws {
+    public func insertBookmark(with flagURL: URL) async throws {
     }
 }

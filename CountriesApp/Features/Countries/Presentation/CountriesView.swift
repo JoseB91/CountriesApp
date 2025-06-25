@@ -8,29 +8,28 @@
 import Foundation
 import SwiftUI
 //TODO: UpdateUI
-//TODO: Add DetailView with button to bookmark
 //TODO: Implement save with rest api
 struct CountriesView: View {
     @State var countriesViewModel: CountriesViewModel
     @Binding var navigationPath: NavigationPath
-    let isFavoriteView: Bool
+    let isBookmarkView: Bool
 
     @State private var searchText = ""
     
     var countries: [Country] {
         if searchText.isEmpty {
-            let bookmarkedCountries = countriesViewModel.countries.filter(\.self.isFavorite)
-            return isFavoriteView ? bookmarkedCountries : countriesViewModel.countries
+            let bookmarkedCountries = countriesViewModel.countries.filter(\.self.isBookmarked)
+            return isBookmarkView ? bookmarkedCountries : countriesViewModel.countries
         } else {
             let filteredCountries = countriesViewModel.countries.filter { $0.commonName.contains(searchText) }
-            let bookmarkedFilteredShows = filteredCountries.filter(\.self.isFavorite)
-            return isFavoriteView ? bookmarkedFilteredShows : filteredCountries
+            let bookmarkedFilteredShows = filteredCountries.filter(\.self.isBookmarked)
+            return isBookmarkView ? bookmarkedFilteredShows : filteredCountries
         }
     }
     
     var body: some View {
         ZStack {
-            if isFavoriteView && countriesViewModel.countries.filter(\.self.isFavorite).isEmpty {
+            if isBookmarkView && countriesViewModel.countries.filter(\.self.isBookmarked).isEmpty {
                 Text("Your bookmarked countries will appear here")
             } else if countriesViewModel.isLoading {
                 ProgressView("Loading countries...")
@@ -43,7 +42,7 @@ struct CountriesView: View {
                                 navigationPath.append(country.officialName)
                             } label: {
                                 CountryCardView(country: country,
-                                             isFavoriteView: isFavoriteView)
+                                             isBookmarkView: isBookmarkView)
                             }
                             .buttonStyle(PlainButtonStyle())
                         }
@@ -57,7 +56,7 @@ struct CountriesView: View {
         .task {
             await countriesViewModel.loadCountries()
         }
-        .navigationTitle(isFavoriteView ? "Saved" : "Search")
+        .navigationTitle(isBookmarkView ? "Saved" : "Search")
         .alert(item: $countriesViewModel.errorMessage) { error in
             Alert(
                 title: Text("Error"),
@@ -76,5 +75,5 @@ struct CountriesView: View {
     
     CountriesView(countriesViewModel: countriesViewModel,
                   navigationPath: .constant(NavigationPath()),
-                  isFavoriteView: false)
+                  isBookmarkView: false)
 }
