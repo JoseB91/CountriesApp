@@ -15,20 +15,20 @@ struct CountryDetailView: View {
             VStack(spacing: 16) {
                 if let flagURL = countryDetailViewModel.country.flagURL {
                     ImageView(url: flagURL)
-                        .frame(height: 150)
-                        .clipped()
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
                 
                 // Country name card
                 VStack {
                     Text(countryDetailViewModel.country.commonName)
                         .font(.title2.bold())
-                        .foregroundStyle(.primary)
                     Text(countryDetailViewModel.country.officialName)
                         .font(.subheadline)
-                        .foregroundStyle(.primary)
                 }
-                .cardStyle()
+                .padding()
+                .background(Color(UIColor.secondarySystemBackground))
+                .cornerRadius(12)
+                .shadow(radius: 4)
 
                 VStack(spacing: 16) {
                     // Region, Subregion, Capital

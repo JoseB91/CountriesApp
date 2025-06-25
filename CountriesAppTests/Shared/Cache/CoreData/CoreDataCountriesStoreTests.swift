@@ -8,7 +8,7 @@
 import XCTest
 @testable import CountriesApp
 
-//TOOD: Add retrieve tests
+//TODO: Add retrieve tests
 
 class CoreDataCountriesStoreTests: XCTestCase, CountriesStoreSpecs {
     

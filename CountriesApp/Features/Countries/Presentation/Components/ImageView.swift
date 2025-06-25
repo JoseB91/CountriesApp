@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+//TODO: Add image from Core Data
 struct ImageView: View {
     let url: URL
     

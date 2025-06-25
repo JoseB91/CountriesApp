@@ -23,12 +23,8 @@ struct CountryCardView: View {
             VStack(alignment: .leading, spacing: 2) {
                 Text(country.commonName)
                     .font(.headline)
-                    .foregroundColor(.primary)
-                
                 Text(country.officialName)
                     .font(.callout)
-                    .foregroundColor(.primary)
-                
                 Text(country.capital)
                     .font(.callout)
                     .foregroundColor(.secondary)
