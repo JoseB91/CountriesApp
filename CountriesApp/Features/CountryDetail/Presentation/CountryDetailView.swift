@@ -13,23 +13,13 @@ struct CountryDetailView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 16) {
+                // Flag and Names
                 if let flagURL = countryDetailViewModel.country.flagURL {
-                    ImageView(url: flagURL)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    FlagAndNameView(url: flagURL,
+                                    commonName: countryDetailViewModel.country.commonName,
+                                    officialName: countryDetailViewModel.country.officialName)
                 }
                 
-                // Country name card
-                VStack {
-                    Text(countryDetailViewModel.country.commonName)
-                        .font(.title2.bold())
-                    Text(countryDetailViewModel.country.officialName)
-                        .font(.subheadline)
-                }
-                .padding()
-                .background(Color(UIColor.secondarySystemBackground))
-                .cornerRadius(12)
-                .shadow(radius: 4)
-
                 VStack(spacing: 16) {
                     // Region, Subregion, Capital
                     HStack(spacing: 12) {
