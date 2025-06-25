@@ -71,7 +71,7 @@ public final class CountryDetailMapper {
                                                     region: $0.region,
                                                     subregion: $0.subregion,
                                                     population: $0.population,
-                                                    timezones: $0.timezones,
+                                                    timezones: $0.timezones.joined(separator: "\n"), 
                                                     //languages: $0.languages.spa,
                                                     //currencies: "\($0.currencies.usd.symbol) \($0.currencies.usd.name)",
                                                     carDriveSide: $0.car.side,

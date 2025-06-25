@@ -1,43 +1,11 @@
 //
-//  CountryCardView.swift
+//  ImageView.swift
 //  CountriesApp
 //
-//  Created by José Briones on 23/6/25.
+//  Created by José Briones on 24/6/25.
 //
 
 import SwiftUI
-
-struct CountryCardView: View {
-    let country: Country
-    let isBookmarkView: Bool
-    
-    var body: some View {
-        VStack(alignment: .leading) {
-            if let flagURL = country.flagURL {
-                ImageView(url: flagURL)
-            }
-            
-            Text(country.commonName)
-                .font(.headline)
-                .foregroundColor(.primary)
-                .lineLimit(1)
-                .padding(.init(top: 4, leading: 4, bottom: 4, trailing: 4))
-            
-//            HStack(spacing: 12) {
-//                if !isBookmarkView {
-//                    Button(action: {
-//                        showsViewModel.toggleFavorite(for: show)
-//                    }) {
-//                        Image(systemName: show.isBookmarked ? "heart.fill" : "heart")
-//                            .foregroundColor(show.isBookmarked ? .red : .secondary)
-//                    }
-//                }
-//            }
-        }
-        .cornerRadius(8)
-    }
-}
-
 
 struct ImageView: View {
     let url: URL
@@ -73,7 +41,6 @@ struct ImageView: View {
                 EmptyView()
             }
         }
-        .cornerRadius(6)
-        .shadow(radius: 2)
     }
 }
+

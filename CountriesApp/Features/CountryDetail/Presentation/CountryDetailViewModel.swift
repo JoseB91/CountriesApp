@@ -68,7 +68,7 @@ final class MockCountryDetailViewModel {
                     region: "Africa",
                     subregion: "Western Africa",
                     population: 8278737,
-                    timezones: ["UTC"],
+                    timezones: "UTC",
                     carDriveSide: "right",
                     coatOfArms: URL(string: "https://mainfacts.com/media/images/coats_of_arms/tg.png")!,
                     isBookmarked: false)

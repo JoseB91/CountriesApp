@@ -16,7 +16,7 @@ public struct Country: Identifiable, Hashable {
     public let region: String?
     public let subregion: String?
     public let population: Int?
-    public let timezones: [String]?
+    public let timezones: String?
     public let languages: String?
     public let currencies: String?
     public let carDriveSide: String?
@@ -25,7 +25,7 @@ public struct Country: Identifiable, Hashable {
     
     public var id: String { commonName }
     
-    public init(commonName: String, officialName: String, capital: String, flagURL: URL? = nil, region: String? = nil, subregion: String? = nil, population: Int? = nil, timezones: [String]? = nil, languages: String? = nil, currencies: String? = nil, carDriveSide: String? = nil, coatOfArms: URL? = nil, isBookmarked: Bool) {
+    public init(commonName: String, officialName: String, capital: String, flagURL: URL? = nil, region: String? = nil, subregion: String? = nil, population: Int? = nil, timezones: String? = nil, languages: String? = nil, currencies: String? = nil, carDriveSide: String? = nil, coatOfArms: URL? = nil, isBookmarked: Bool) {
         self.commonName = commonName
         self.officialName = officialName
         self.capital = capital

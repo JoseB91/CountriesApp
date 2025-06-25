@@ -7,13 +7,12 @@
 
 import Foundation
 import SwiftUI
-//TODO: UpdateUI
-//TODO: Implement save with rest api
+
 struct CountriesView: View {
     @State var countriesViewModel: CountriesViewModel
     @Binding var navigationPath: NavigationPath
     let isBookmarkView: Bool
-
+    
     @State private var searchText = ""
     
     var countries: [Country] {
@@ -36,16 +35,15 @@ struct CountriesView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             } else {
                 ScrollView {
-                    LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
-                        ForEach(countries) { country in
-                            Button {
+                    ForEach(countries) { country in
+                        Button {
+                            if !isBookmarkView {
                                 navigationPath.append(country.officialName)
-                            } label: {
-                                CountryCardView(country: country,
-                                             isBookmarkView: isBookmarkView)
                             }
-                            .buttonStyle(PlainButtonStyle())
+                        } label: {
+                            CountryCardView(country: country)
                         }
+                        .buttonStyle(PlainButtonStyle())
                     }
                     .padding()
                     .searchable(text: $searchText, prompt: "Search")
@@ -73,7 +71,9 @@ struct CountriesView: View {
         isFavoriteViewModel: false
     )
     
-    CountriesView(countriesViewModel: countriesViewModel,
-                  navigationPath: .constant(NavigationPath()),
-                  isBookmarkView: false)
+    NavigationStack {
+        CountriesView(countriesViewModel: countriesViewModel,
+                      navigationPath: .constant(NavigationPath()),
+                      isBookmarkView: false)
+    }
 }
