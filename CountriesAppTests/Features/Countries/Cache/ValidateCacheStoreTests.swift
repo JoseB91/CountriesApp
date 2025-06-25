@@ -56,7 +56,7 @@ class ValidateCacheTests: XCTestCase {
         
         try? await sut.validateCache()
 
-        XCTAssertEqual(store.receivedMessages, [.retrieve, .delete])
+        XCTAssertEqual(store.receivedMessages, [.retrieveAll, .delete])
     }
 
     func test_validateCache_doesNotDeleteCacheOnEmptyCache() async {
@@ -65,7 +65,7 @@ class ValidateCacheTests: XCTestCase {
 
         try? await sut.validateCache()
         
-        XCTAssertEqual(store.receivedMessages, [.retrieve])
+        XCTAssertEqual(store.receivedMessages, [.retrieveAll])
     }
         
     func test_validateCache_deletesOnCacheExpiration() async {
@@ -77,7 +77,7 @@ class ValidateCacheTests: XCTestCase {
 
         try? await sut.validateCache()
 
-        XCTAssertEqual(store.receivedMessages, [.retrieve, .delete])
+        XCTAssertEqual(store.receivedMessages, [.retrieveAll, .delete])
     }
     
     func test_validateCache_deletesOnExpiredCache() async {
@@ -89,7 +89,7 @@ class ValidateCacheTests: XCTestCase {
 
         try? await sut.validateCache()
         
-        XCTAssertEqual(store.receivedMessages, [.retrieve, .delete])
+        XCTAssertEqual(store.receivedMessages, [.retrieveAll, .delete])
     }
     
     func test_validateCache_doesNotDeleteOnNonExpiredCache() async {
@@ -101,7 +101,7 @@ class ValidateCacheTests: XCTestCase {
         
         try? await sut.validateCache()
         
-        XCTAssertEqual(store.receivedMessages, [.retrieve])
+        XCTAssertEqual(store.receivedMessages, [.retrieveAll])
     }
     
     func test_validateCache_failsOnDeletionErrorOfFailedRetrieval() async {

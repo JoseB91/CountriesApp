@@ -28,7 +28,7 @@ struct CountryDetailView: View {
                 Button(action: {
                     toggleBookmark()
                 }) {
-                    Image(systemName: countryDetailViewModel.country.isBookmarked ? "bookmark.fill" : "bookmark")
+                    Image(systemName: countryDetailViewModel.isBookmarked ? "bookmark.fill" : "bookmark")
                         .foregroundColor(.blue)
                 }
             }
@@ -56,7 +56,7 @@ struct CountryDetailView: View {
 
 #Preview {
     let countryDetailViewModel = CountryDetailViewModel(
-        countryDetailLoader: MockCountryDetailViewModel.mockCountryDetail,
+        countryDetailLoader: MockCountryDetailViewModel.mockCountryDetailLoader,
         localCountriesLoader: MockCountryDetailViewModel.mockLocalCountriesLoader()
     )
     CountryDetailView(countryDetailViewModel: countryDetailViewModel)

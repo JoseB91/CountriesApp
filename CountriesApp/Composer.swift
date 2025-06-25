@@ -70,15 +70,19 @@ class Composer {
     }
     
     func composeCountryDetailViewModel(for name: String) -> CountryDetailViewModel {
-        let countryDetailLoader: () async throws -> Country = { [baseURL, httpClient] in
+        let countryDetailLoader: () async throws -> (Country, Bool?) = { [baseURL, httpClient, localCountriesLoader] in
             
             let url = CountryDetailEndpoint.getCountryDetail(name: name).url(baseURL: baseURL)
             let (data, response) = try await httpClient.get(from: url)
             let country = try CountryDetailMapper.map(data, from: response)
             
-            return country
+            guard let flagURL = country.flagURL else { return (country, false) }
+            
+            let isBookmarked = try? await localCountriesLoader.loadBookmark(with: flagURL)
+                           
+            return (country, isBookmarked)
         }
-        
+    
         return CountryDetailViewModel(countryDetailLoader: countryDetailLoader,
                                       localCountriesLoader: localCountriesLoader)
     }

@@ -18,7 +18,7 @@ final class LoadShowsCacheTests: XCTestCase {
         _ = try? await sut.load()
         
         // Assert
-        XCTAssertEqual(store.receivedMessages, [.retrieve])
+        XCTAssertEqual(store.receivedMessages, [.retrieveAll])
     }
         
     func test_load_deliversCachedShowsOnNonExpiredCache() async {

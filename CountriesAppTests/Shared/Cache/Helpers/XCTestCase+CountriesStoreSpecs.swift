@@ -103,7 +103,7 @@ extension CountriesStoreSpecs where Self: XCTestCase {
         let retrievedResult: Result<CachedCountries?, Error>
         
         do {
-            let retrievedLeagues = try await sut.retrieve()
+            let retrievedLeagues = try await sut.retrieveAll()
             retrievedResult = .success(retrievedLeagues)
         } catch {
             retrievedResult = .failure(error)
@@ -121,7 +121,7 @@ extension CountriesStoreSpecs where Self: XCTestCase {
 
         default:
             // Assert
-            XCTFail("Expected to retrieve \(expectedResult), got \(retrievedResult) instead", file: file, line: line)
+            XCTFail("Expected to retrieveAll \(expectedResult), got \(retrievedResult) instead", file: file, line: line)
         }
     }
 }

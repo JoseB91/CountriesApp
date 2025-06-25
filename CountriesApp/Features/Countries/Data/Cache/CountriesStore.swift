@@ -12,6 +12,7 @@ public typealias CachedCountries = (countries: [LocalCountry], timestamp: Date)
 public protocol CountriesStore {
     func deleteCache() async throws
     func insert(_ countries: [LocalCountry], timestamp: Date) async throws
-    func retrieve() async throws -> CachedCountries?
+    func retrieveAll() async throws -> CachedCountries?
+    func retrieveBookmark(with flagURL: URL) async throws -> Bool?
     func insertBookmark(with flagURL: URL) async throws
 }

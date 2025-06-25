@@ -15,13 +15,14 @@ final class CountryDetailViewModel {
                           officialName: "",
                           capital: "",
                           isBookmarked: false)
+    var isBookmarked = false
     var isLoading = false
     var errorMessage: ErrorModel? = nil
     
-    private let countryDetailLoader: () async throws -> Country
+    private let countryDetailLoader: () async throws -> (Country, Bool?)
     private let localCountriesLoader: LocalCountriesLoader
     
-    init(countryDetailLoader: @escaping () async throws -> Country, localCountriesLoader: LocalCountriesLoader) {
+    init(countryDetailLoader: @escaping () async throws -> (Country, Bool?), localCountriesLoader: LocalCountriesLoader) {
         self.countryDetailLoader = countryDetailLoader
         self.localCountriesLoader = localCountriesLoader
     }
@@ -31,7 +32,9 @@ final class CountryDetailViewModel {
         isLoading = true
         
         do {
-            country = try await countryDetailLoader()
+            let tuple = try await countryDetailLoader()
+            country = tuple.0
+            isBookmarked = tuple.1 ?? false
         } catch {
             errorMessage = ErrorModel(message: "Failed to load countries: \(error.localizedDescription)")
         }
@@ -40,7 +43,7 @@ final class CountryDetailViewModel {
     }
         
     func toggleBookmark(for flagURL: URL) {
-        country.isBookmarked.toggle()
+        isBookmarked.toggle()
         
         Task {
             do {
@@ -49,7 +52,7 @@ final class CountryDetailViewModel {
                 await MainActor.run {
                     self.errorMessage = ErrorModel(message: "Failed to save favorite: \(error.localizedDescription)")
                                         
-                    country.isBookmarked.toggle()
+                    isBookmarked.toggle()
                 }
             }
         }
@@ -71,8 +74,8 @@ final class MockCountryDetailViewModel {
                     isBookmarked: false)
     }
     
-    static func mockCountryDetailLoader() async throws -> Country {
-        return mockCountryDetail()
+    static func mockCountryDetailLoader() async throws -> (Country, Bool?) {
+        return (mockCountryDetail(), false)
     }
     
     static func mockLocalCountriesLoader() -> LocalCountriesLoader {
@@ -81,13 +84,17 @@ final class MockCountryDetailViewModel {
 }
 
 final class MockCountryStore: CountriesStore {
+    func retrieveBookmark(with flagURL: URL) async throws -> Bool? {
+        false
+    }
+    
     func deleteCache() async throws {
     }
     
     func insert(_ countries: [LocalCountry], timestamp: Date) async throws {
     }
     
-    func retrieve() async throws -> CachedCountries? {
+    func retrieveAll() async throws -> CachedCountries? {
         return nil
     }
     

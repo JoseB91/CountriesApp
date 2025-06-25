@@ -24,8 +24,12 @@ extension InMemoryStore: CountriesStore {
         }
     }
 
-    public func retrieve() throws -> CachedCountries? {
+    public func retrieveAll() throws -> CachedCountries? {
         countriesCache
+    }
+    
+    public func retrieveBookmark(with flagURL: URL) async throws -> Bool? {
+        return false
     }
     
     public func insertBookmark(with flagURL: URL) async throws {

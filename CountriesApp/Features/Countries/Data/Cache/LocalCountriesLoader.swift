@@ -36,7 +36,7 @@ extension LocalCountriesLoader {
     private struct FailedFavoriteSave: Error {}
     
     public func load() async throws -> [Country] {
-        if let cache = try await store.retrieve(), CachePolicy.validate(cache.timestamp, against: currentDate()) {
+        if let cache = try await store.retrieveAll(), CachePolicy.validate(cache.timestamp, against: currentDate()) {
             return cache.countries.toModels()
         } else {
             throw FailedLoad()
@@ -50,6 +50,14 @@ extension LocalCountriesLoader {
             throw FailedFavoriteSave()
         }
     }
+    
+    public func loadBookmark(with flagURL: URL) async throws -> Bool {
+        if let isBookmarked = try await store.retrieveBookmark(with: flagURL) {
+            return isBookmarked
+        } else {
+            throw FailedLoad()
+        }
+    }
 }
 
 extension LocalCountriesLoader {
@@ -57,7 +65,7 @@ extension LocalCountriesLoader {
     
     public func validateCache() async throws {
         do {
-            if let cache = try await store.retrieve(),
+            if let cache = try await store.retrieveAll(),
                !CachePolicy.validate(cache.timestamp,
                                      against: currentDate()) {
                 throw InvalidCache()

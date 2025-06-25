@@ -9,11 +9,18 @@ import CoreData
 
 extension CoreDataCountriesAppStore: CountriesStore {
     
-    public func retrieve() async throws -> CachedCountries? {
+    public func retrieveAll() async throws -> CachedCountries? {
         try await context.perform { [context] in
             try ManagedCache.find(in: context).map {
                 CachedCountries(countries: $0.localCountries, timestamp: $0.timestamp)
             }
+        }
+    }
+    
+    public func retrieveBookmark(with flagURL: URL) async throws -> Bool? {
+        try await context.perform { [context] in
+            let country = try ManagedCountry.getCountry(with: flagURL, in: context)
+            return country?.isBookmarked
         }
     }
         

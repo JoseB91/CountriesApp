@@ -12,7 +12,7 @@ public class CountriesStoreSpy: CountriesStore {
     enum ReceivedMessage: Equatable {
         case delete
         case insert([LocalCountry], Date)
-        case retrieve
+        case retrieveAll
         case insertBookmark(URL)
     }
     
@@ -52,8 +52,8 @@ public class CountriesStoreSpy: CountriesStore {
     }
     
     // MARK: Retrieve
-    public func retrieve() async throws -> CachedCountries? {
-        receivedMessages.append(.retrieve)
+    public func retrieveAll() async throws -> CachedCountries? {
+        receivedMessages.append(.retrieveAll)
         return try retrievalResult?.get()
     }
 
