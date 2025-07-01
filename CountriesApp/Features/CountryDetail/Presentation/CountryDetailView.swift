@@ -71,7 +71,7 @@ struct CountryDetailView: View {
                     Button(action: {
                         toggleBookmark()
                     }) {
-                        Image(systemName: countryDetailViewModel.isBookmarked ? "bookmark.fill" : "bookmark")
+                        Image(systemName: countryDetailViewModel.country.isBookmarked ? "bookmark.fill" : "bookmark")
                             .foregroundColor(.blue)
                     }
                 }
@@ -136,11 +136,11 @@ struct EnabledText: View {
 }
 
 #Preview {
-    let countryDetailViewModel = CountryDetailViewModel(
-        countryDetailLoader: MockCountryDetailViewModel.mockCountryDetailLoader,
-        localCountriesLoader: MockCountryDetailViewModel.mockLocalCountriesLoader()
-    )
-    NavigationStack {
-        CountryDetailView(countryDetailViewModel: countryDetailViewModel)
-    }
+//    let countryDetailViewModel = CountryDetailViewModel(
+//        countryDetailLoader: MockCountryDetailViewModel.mockCountryDetailLoader,
+//        localCountriesLoader: MockCountryDetailViewModel.mockLocalCountriesLoader()
+//    )
+//    NavigationStack {
+//        CountryDetailView(countryDetailViewModel: countryDetailViewModel)
+//    }
 }

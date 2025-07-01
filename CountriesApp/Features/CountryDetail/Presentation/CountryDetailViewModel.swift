@@ -15,15 +15,14 @@ final class CountryDetailViewModel {
                           officialName: "",
                           capital: "",
                           isBookmarked: false)
-    var isBookmarked = false
     var isLoading = false
     var errorMessage: ErrorModel? = nil
     
-    private let countryDetailLoader: () async throws -> (Country, Bool?)
+    private let countryDetailRepository: CountryRepository
     private let localCountriesLoader: LocalCountriesLoader
     
-    init(countryDetailLoader: @escaping () async throws -> (Country, Bool?), localCountriesLoader: LocalCountriesLoader) {
-        self.countryDetailLoader = countryDetailLoader
+    init(countryDetailRepository: CountryRepository, localCountriesLoader: LocalCountriesLoader) {
+        self.countryDetailRepository = countryDetailRepository
         self.localCountriesLoader = localCountriesLoader
     }
     
@@ -32,18 +31,16 @@ final class CountryDetailViewModel {
         isLoading = true
         
         do {
-            let tuple = try await countryDetailLoader()
-            country = tuple.0
-            isBookmarked = tuple.1 ?? false
+            country = try await countryDetailRepository.loadCountry()
         } catch {
-            errorMessage = ErrorModel(message: "Failed to load countries: \(error.localizedDescription)")
+            errorMessage = ErrorModel(message: "Failed to load country detail: \(error.localizedDescription)")
         }
         
         isLoading = false
     }
         
     func toggleBookmark(for flagURL: URL) {
-        isBookmarked.toggle()
+        country.isBookmarked.toggle()
         
         Task {
             do {
@@ -52,7 +49,7 @@ final class CountryDetailViewModel {
                 await MainActor.run {
                     self.errorMessage = ErrorModel(message: "Failed to save favorite: \(error.localizedDescription)")
                                         
-                    isBookmarked.toggle()
+                    country.isBookmarked.toggle()
                 }
             }
         }

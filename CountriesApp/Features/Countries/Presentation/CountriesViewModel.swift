@@ -12,42 +12,47 @@ import Observation
 final class CountriesViewModel {
     
     var countries = [Country]()
+    
+    var filteredCountries: [Country] {
+        if searchText.isEmpty {
+            return countries
+        } else {
+            return countries.filter { $0.commonName.contains(searchText) }
+        }
+    }
+    
+    var filteredBookmarkedCountries: [Country] {
+        if searchText.isEmpty {
+            return countries.filter(\.self.isBookmarked)
+        } else {
+            let filteredCountries = countries.filter { $0.commonName.contains(searchText) }
+            return filteredCountries.filter(\.self.isBookmarked)
+        }
+    }
+
     var isLoading = false
     var errorMessage: ErrorModel? = nil
     var searchText: String = ""
     
-    private let countriesLoader: () async throws -> [Country]
-    private let isFavoriteViewModel: Bool
+    private let countriesViewModelRepository: CountriesViewModelRepository
     
-    init(countriesLoader: @escaping () async throws -> [Country], isFavoriteViewModel: Bool) {
-        self.countriesLoader = countriesLoader
-        self.isFavoriteViewModel = isFavoriteViewModel
+    init(countriesViewModelRepository: CountriesViewModelRepository) {
+        self.countriesViewModelRepository = countriesViewModelRepository
     }
     
     @MainActor
     func loadCountries() async {
-        if isFavoriteViewModel {
-            isLoading = true
-            
-            do {
-                countries = try await countriesLoader()
-            } catch {
-                errorMessage = ErrorModel(message: "Failed to load favorite countries: \(error.localizedDescription)")
-            }
-            
-            isLoading = false
-        } else {
-            isLoading = true
-            
-            do {
-                countries = try await countriesLoader()
-            } catch {
-                errorMessage = ErrorModel(message: "Failed to load countries: \(error.localizedDescription)")
-            }
+        isLoading = true
         
-            isLoading = false
+        do {
+            countries = try await countriesViewModelRepository.loadCountries()
+        } catch {
+            errorMessage = ErrorModel(message: "Failed to load countries: \(error.localizedDescription)")
         }
+        
+        isLoading = false
     }
+    
 }
 
 final class MockCountriesViewModel {

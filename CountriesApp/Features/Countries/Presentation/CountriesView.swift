@@ -12,20 +12,7 @@ struct CountriesView: View {
     @State var countriesViewModel: CountriesViewModel
     @Binding var navigationPath: NavigationPath
     let isBookmarkView: Bool
-    
-    @State private var searchText = ""
-    
-    var countries: [Country] {
-        if searchText.isEmpty {
-            let bookmarkedCountries = countriesViewModel.countries.filter(\.self.isBookmarked)
-            return isBookmarkView ? bookmarkedCountries : countriesViewModel.countries
-        } else {
-            let filteredCountries = countriesViewModel.countries.filter { $0.commonName.contains(searchText) }
-            let bookmarkedFilteredShows = filteredCountries.filter(\.self.isBookmarked)
-            return isBookmarkView ? bookmarkedFilteredShows : filteredCountries
-        }
-    }
-    
+        
     var body: some View {
         ZStack {
             if isBookmarkView && countriesViewModel.countries.filter(\.self.isBookmarked).isEmpty {
@@ -35,7 +22,7 @@ struct CountriesView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             } else {
                 ScrollView {
-                    ForEach(countries) { country in
+                    ForEach(isBookmarkView ? countriesViewModel.filteredBookmarkedCountries : countriesViewModel.filteredCountries) { country in
                         Button {
                             if !isBookmarkView {
                                 navigationPath.append(country.officialName)
@@ -46,7 +33,7 @@ struct CountriesView: View {
                         .buttonStyle(PlainButtonStyle())
                     }
                     .padding()
-                    .searchable(text: $searchText, prompt: "Search")
+                    .searchable(text: $countriesViewModel.searchText, prompt: "Search")
                 }
             }
         }
@@ -66,14 +53,14 @@ struct CountriesView: View {
 }
 
 #Preview {
-    let countriesViewModel = CountriesViewModel(
-        countriesLoader: MockCountriesViewModel.mockCountriesLoader,
-        isFavoriteViewModel: false
-    )
+//    let countriesViewModel = CountriesViewModel(
+//        countriesLoader: MockCountriesViewModel.mockCountriesLoader,
+//        isFavoriteViewModel: false
+//    )
     
-    NavigationStack {
-        CountriesView(countriesViewModel: countriesViewModel,
-                      navigationPath: .constant(NavigationPath()),
-                      isBookmarkView: false)
-    }
+//    NavigationStack {
+//        CountriesView(countriesViewModel: countriesViewModel,
+//                      navigationPath: .constant(NavigationPath()),
+//                      isBookmarkView: false)
+//    }
 }
